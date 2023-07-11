@@ -71,12 +71,19 @@
         if (randomNumber === userGuess) {
           // 축하 메시지를 표시합니다.
           lastResult.textContent = '축하합니다! 맞추셨어요!';
+          lowOrHi.textContent = '';
           // 게임이 끝나는 로직
           setGameOver();
         } else if (guessCount === 10) {
           lastResult.textContent = '게임 오버! 10회를 모두 사용하셨습니다.';
           setGameOver();
         } else {
+          lastResult.textContent = '틀렸어요!';
+          if (randomNumber > userGuess) {
+            lowOrHi.textContent = '추측한 숫자보다 높습니다!';
+          } else if (randomNumber < userGuess) {
+            lowOrHi.textContent = '추측한 숫자보다 낮습니다!';
+          }
         }
         // guessCount를 1증가해준다.
         guessCount++;
