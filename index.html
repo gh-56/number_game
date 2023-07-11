@@ -19,7 +19,10 @@
   </head>
   <body>
     <h1>숫자 추측 게임</h1>
-    <p>1 ~ 100까지 랜덤 숫자를 선택하세요. 더 높은지 더 낮은지 말씀드릴게요.</p>
+    <p>
+      1 ~ 100까지 랜덤 숫자를 선택하세요. 도전기회는 10번 있습니다. 더 높은지 더
+      낮은지 말씀드릴게요.
+    </p>
 
     <!-- 입력창 -->
     <form action="form">
@@ -69,19 +72,21 @@
           // 축하 메시지를 표시합니다.
           lastResult.textContent = '축하합니다! 맞추셨어요!';
           // 게임이 끝나는 로직
-          // setGameOver();
-          // 추측창을 사용할 수 없게
-          guessField.disabled = true;
-          guessSubmit.disabled = true;
-          // 버튼 태그인 리셋버튼을 DOM요소로 생성해주세요.
-          resetButton = document.createElement('button');
-          // 생성한 DOM 요소의 텍스트 컨텐츠를 "새 게임하기"로 변경합니다.
-          resetButton.textContent = '새 게임하기';
-          // 만든 DOM 버튼을 body 태그 안에 추가합니다.
-          document.body.appendChild(resetButton);
-        } else if (condition) {
+          setGameOver();
+        } else if (guessCount === 10) {
+          lastResult.textContent = '게임 오버! 10회를 모두 사용하셨습니다.';
+          setGameOver();
         } else {
         }
+        // guessCount를 1증가해준다.
+        guessCount++;
+      }
+      function setGameOver() {
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+        resetButton = document.createElement('button');
+        resetButton.textContent = '새 게임하기';
+        document.body.appendChild(resetButton);
       }
       guessSubmit.addEventListener('click', checkGuess);
     </script>
